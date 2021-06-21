@@ -2,3 +2,5 @@
 /eureka-server/target/
 /serviceA/target/
 /serviceB/target/
+/.idea/
+/springcloud-shop.iml
