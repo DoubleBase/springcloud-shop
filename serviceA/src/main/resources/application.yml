@@ -1,0 +1,17 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: serviceA
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      #defaultZone: http://peer1:7001/eureka/,http://peer2:7002/eureka/
+      defaultZone: http://localhost:8761/eureka/

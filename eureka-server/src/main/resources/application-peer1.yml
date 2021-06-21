@@ -1,0 +1,19 @@
+server:
+  port: 7001
+
+spring:
+  cloud:
+    config:
+      enabled: false
+      profile: peer1
+
+eureka:
+  instance:
+    hostname: peer1
+    appname: eureka-server
+  client:
+    serviceUrl:
+      defaultZone: http://peer2:7002/eureka/
+
+
+
