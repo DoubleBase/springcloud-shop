@@ -1,32 +1,46 @@
 package com.melon.app;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.context.annotation.Bean;
+import com.melon.api.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author muskmelon
  * @since 1.0
  */
 @RestController
-@Configuration
+@RequestMapping("/serviceB/user")
 public class ServiceBController {
 
-    @Bean
-    @LoadBalanced
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
+    @Autowired
+    private ServiceAClient serviceA;
+
+    @RequestMapping(value = "/sayHello/{id}", method = RequestMethod.GET)
+    public String greeting(@PathVariable("id") Long id,
+                           @RequestParam("name") String name,
+                           @RequestParam("age") Integer age) {
+        return serviceA.sayHello(id, name, age);
     }
 
-    @RequestMapping(value = "/greeting/{name}", method = RequestMethod.GET)
-    public String greeting(@PathVariable("name") String name) {
-        RestTemplate restTemplate = getRestTemplate();
-        return restTemplate.getForObject("http://serviceA/sayHello/" + name, String.class);
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String createUser(@RequestBody User user) {
+        return serviceA.createUser(user);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public String updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+        return serviceA.updateUser(id, user);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String deleteUser(@PathVariable("id") Long id) {
+        return serviceA.deleteUser(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public User getById(@PathVariable("id") Long id) {
+        return serviceA.getById(id);
     }
 
 }
