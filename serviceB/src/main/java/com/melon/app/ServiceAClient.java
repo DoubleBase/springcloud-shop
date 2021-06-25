@@ -7,6 +7,6 @@ import org.springframework.cloud.netflix.feign.FeignClient;
  * @author muskmelon
  * @since 1.0
  */
-@FeignClient("serviceA")
+@FeignClient(value = "serviceA")
 public interface ServiceAClient extends ServiceAInterface {
 }

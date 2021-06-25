@@ -16,6 +16,13 @@ public class ServiceAController implements ServiceAInterface {
                            @RequestParam("name") String name,
                            @RequestParam("age") Integer age) {
         System.out.println("打招呼，id=" + id + ", name=" + name + ", age=" + age);
+        /*System.out.println("漫长的等待=============");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("任务执行完成=============");*/
         return "{\"msg\": \"hello, " + name + "\"}";
     }
 
