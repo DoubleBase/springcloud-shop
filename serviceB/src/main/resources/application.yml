@@ -14,7 +14,18 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
     fetchRegistry: true
-    registryFetchIntervalSeconds: 300000
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+  circuitBreaker:
+    requestVolumeThreshold: 4
 #ribbon:
 #  ConnectTimeout: 1000
 #  ReadTimeout: 1000
